@@ -7,10 +7,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/88859c7b51.js" crossorigin="anonymous"></script>
-    <title>Flask URL Shortener</title>
+    <title>{% block title %} {% endblock %}Flask URL Shortener</title>
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        
         <a class="navbar-brand" href="#"><i class="fa-solid fa-scissors fa-spin"></i>  URL Shortener</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -23,9 +24,9 @@
                 <a class="nav-link"  href="#"><i class="fas fa-house-chimney-window text- mr"></i> Home <span class="sr-only">(current)</span></a>
             </li>
             
-            <li class="nav-item active">
-              <a class="nav-link " href="{{url_for('stats')}}"><i class="fas fa-square-poll-vertical text-"></i> Stats</a>
-            </li>
+            <!--<li class="nav-item active">               
+                <a class="nav-link " href="{{url_for('stats')}}"><i class="fas fa-square-poll-vertical text-"></i> Stats</a>             
+            </li>-->
           </ul> 
          
           <form action="/search" class="form-inline my-2 my-lg-0" role="search">
@@ -37,25 +38,33 @@
         
         </div>
       </nav>
-      <div class="container">
+
+      <div class="container mt-5">
         {% for message in get_flashed_messages() %}
-        <div class="alert alert-danger">{{ message }}</div>
+        <div class="alert alert-danger">{{ message }}
+        </div>
         {% endfor %}
-        <h2> <i class="fa-brands fa-think-peaks"></i> Welcome to Flask URL Shortener<i class="fa-brands fa-think-peaks"></i></h2>
-        <form action=" " method="post">
-            <div class="form-group">
-                <label for="url">URL</label>
-                <input type="text" name="url" placeholder="URL to shorten" class="form-control"
-                    value="{{ request.form['url'] }}" autofocus required></input>
-            </div>
-            <div class="form-group">
-                <center><button type="submit" style="color:white" class="btn btn-outline-dark bg-dark">Submit</button></center>
-            </div>
-        </form>
-        {% if short_url %}
-        <hr>
-        <span>{{ short_url }}</span><br>
-        {% endif %}
+        {% block content %} 
+        
+            <h2 > <i class="fa-brands fa-think-peaks"></i> Enter URL to Flask  Shortener<i class="fa-brands fa-think-peaks"></i></h2>
+            <form action=" " method="post">
+                <div class="form-group"><hr style="border:none">
+                    <label for="url">Drop your URL here 👇🏻:</label>
+                    <input type="text" name="url" placeholder="URL to shorten" class="form-control"
+                        value="{{ request.form['url'] }}" autofocus required></input>
+                </div>
+                <div class="form-group">
+                    <center><button type="submit" style="color:white" class="btn btn-outline-dark bg-dark">Submit</button></center>
+                </div>
+            </form>
+
+            {% if short_url %}
+            <h3> The Shortened URL is 😼:</h3>
+            <hr>
+            <span>{{ short_url }}</span><br>
+            {% endif %}
+        {% endblock %}
+      
     </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
