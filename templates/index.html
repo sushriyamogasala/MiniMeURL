@@ -21,12 +21,12 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link"  href="#"><i class="fas fa-house-chimney-window text- mr"></i> Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link"  href="{{url_for('index')}}"><i class="fas fa-house-chimney-window text- mr"></i> Home <span class="sr-only">(current)</span></a>
             </li>
             
-            <!--<li class="nav-item active">               
+            <li class="nav-item active">               
                 <a class="nav-link " href="{{url_for('stats')}}"><i class="fas fa-square-poll-vertical text-"></i> Stats</a>             
-            </li>-->
+            </li>
           </ul> 
          
           <form action="/search" class="form-inline my-2 my-lg-0" role="search">
